@@ -1,0 +1,10 @@
+<div *ngFor="let node of tree">
+    <ul>
+        <li>
+            {{node.data}}
+            <button (click)="addNode(node)">+</button>
+            <button (click)="deleteNode(node)">-</button>
+            <app-node-component [tree]="node.children" *ngIf="node.children"></app-node-component>
+        </li>
+    </ul>
+</div>
