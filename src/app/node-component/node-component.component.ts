@@ -1,5 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Node } from '../node';
+import {
+  Component,
+  OnInit,
+  Input
+} from '@angular/core';
+import {
+  Node
+} from '../node';
 
 @Component({
   selector: 'app-node-component',
@@ -9,23 +15,21 @@ import { Node } from '../node';
 export class NodeComponentComponent implements OnInit {
 
   @Input() tree: Node;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+  addNodePopupVisible: boolean = false
+  clickedNode: Node;
   addNode(node: Node): void {
-    node.children.push({data: 'child '  + node.children.length, children: [], parent: node});
+    this.addNodePopupVisible = true;
+    this.clickedNode = node;
   }
   deleteNode(node: Node): void {
     const Parent: any = node.parent;
     Parent.children.forEach((element, index) => {
-      if ( element === node ) {
+      if (element === node) {
         Parent.children.splice(index, 1);
       }
     });
-
-    if(node.parent) {
-      
-    }
   }
 }
