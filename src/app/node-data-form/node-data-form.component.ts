@@ -1,8 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {
-  Node
-} from '../node';
-// import {NgForm} from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Node } from '../node';
 
 @Component({
   selector: 'app-node-data-form',
@@ -11,10 +8,10 @@ import {
 })
 export class NodeDataFormComponent implements OnInit {
   @Input() clickedNode: Node;
+  @Output() onCreateNode = new EventEmitter<boolean>();
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
   node: Node = {
     data: "",
     children: [],
@@ -26,7 +23,7 @@ export class NodeDataFormComponent implements OnInit {
       children: [],
       parent: this.clickedNode
     });
-    // console.log(this.node.data);
+    this.onCreateNode.emit();
   };
 
 }

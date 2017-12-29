@@ -1,11 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Input
-} from '@angular/core';
-import {
-  Node
-} from '../node';
+import { Component, OnInit, Input } from '@angular/core';
+import { Node } from '../node';
 
 @Component({
   selector: 'app-node-component',
@@ -18,11 +12,22 @@ export class NodeComponentComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-  addNodePopupVisible: boolean = false
+  addNodePopupVisible: boolean = false;
+  editNodePopupVisible: boolean = false;
+  nodeData: string;
   clickedNode: Node;
   addNode(node: Node): void {
     this.addNodePopupVisible = true;
     this.clickedNode = node;
+  }
+  editNode(node: Node): void {
+    this.editNodePopupVisible = true;
+    this.clickedNode = node;
+  }
+  updateNode(): void {
+    this.clickedNode.data = this.nodeData;
+    this.editNodePopupVisible = false;
+    this.nodeData = "";
   }
   deleteNode(node: Node): void {
     const Parent: any = node.parent;
@@ -31,5 +36,8 @@ export class NodeComponentComponent implements OnInit {
         Parent.children.splice(index, 1);
       }
     });
+  }
+  onCreateNode() {
+    this.addNodePopupVisible = false;
   }
 }
